@@ -1,0 +1,31 @@
+Post index
+<%= link_to "Create new post", new_post_path %>
+<% if user_signed_in? %>
+  <strong>Current user:</strong>
+  <%= current_user.username %>
+  <%= button_to "Sign out", destroy_user_session_path, :method => :delete %>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %>
+  <%= link_to "Sign_up", new_user_registration_path %>
+<% end %>
+
+<% @posts.each do |post| %>
+
+<div id="<%= dom_id post %>">
+  <p>
+    <strong>User:</strong>
+    <% if user_signed_in? %>
+      <%= post.user_id %>
+    <% else %>
+      <span>Anonymous</span>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= post.post_content %>
+  </p>
+
+</div>
+
+<% end %>
